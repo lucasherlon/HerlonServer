@@ -1,7 +1,8 @@
 # HerlonServer
 <ul>
 <li>buildar o projeto: dotnet build</li>
-<li>rodat o projeto: dotnet run</li>
+<li>rodar o projeto: dotnet run</li>
+<li>Os comandos devem ser feitos dentro da pasta principal do projeto</li>
 </ul>
 <hr>
 <ul>
