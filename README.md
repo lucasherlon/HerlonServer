@@ -1,5 +1,10 @@
 # HerlonServer
 <ul>
+<li>buildar o projeto: dotnet build</li>
+<li>rodat o projeto: dotnet run</li>
+</ul>
+<hr>
+<ul>
 <li>Servidor web simples feito com C#</li>
 <li>Há três páginas de resposta: uma para sucesso, outra para erro e outra pasta para teste de rotas dinâmicas</li>
 <li>Os paths para os documentos html no repositório se referem aos caminhos no meu computador. Se for rodar em outra máquina, mude os paths</li>
