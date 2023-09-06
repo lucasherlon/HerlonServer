@@ -8,13 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="pages\NovaPasta1\**" />
     <Compile Remove="pages\NovaPasta\**" />
+    <EmbeddedResource Remove="pages\NovaPasta1\**" />
     <EmbeddedResource Remove="pages\NovaPasta\**" />
+    <None Remove="pages\NovaPasta1\**" />
     <None Remove="pages\NovaPasta\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="pages\NovaPasta1\" />
   </ItemGroup>
 
 </Project>

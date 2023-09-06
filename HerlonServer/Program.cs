@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Net.Http;
 
 class RequestHandler
 {
@@ -34,6 +35,20 @@ class RequestHandler
 
     }
 
+    static void HandleSuccess(HttpListenerResponse response, string htmlContent)
+    {
+        response.StatusCode = (int)HttpStatusCode.OK;
+        response.ContentType = "text/html";
+        response.ContentLength64 = htmlContent.Length;
+
+        using (Stream output = response.OutputStream)
+        using (StreamWriter writer = new StreamWriter(output))
+        {
+            writer.Write(htmlContent);
+        }
+
+    }
+
     static void ProcessRequest(HttpListenerContext context)
     {
         HttpListenerRequest request = context.Request;
@@ -48,15 +63,7 @@ class RequestHandler
         { 
             string htmlContent = File.ReadAllText("C:\\Users\\samsung\\source\\repos\\HerlonServer\\HerlonServer\\pages\\index.html");
 
-            response.StatusCode = (int)HttpStatusCode.OK;
-            response.ContentType = "text/html";
-            response.ContentLength64 = htmlContent.Length;
-
-            using (Stream output = response.OutputStream)
-            using (StreamWriter writer = new StreamWriter(output))
-            {
-                writer.Write(htmlContent);
-            }
+            HandleSuccess(response, htmlContent);
 
             Console.WriteLine($"Status: {response.StatusCode}");
             
@@ -65,15 +72,7 @@ class RequestHandler
         {
             string htmlContent = File.ReadAllText(htmlFilePath);
 
-            response.StatusCode = (int)HttpStatusCode.OK;
-            response.ContentType = "text/html";
-            response.ContentLength64 = htmlContent.Length;
-
-            using (Stream output = response.OutputStream)
-            using (StreamWriter writer = new StreamWriter(output))
-            {
-                writer.Write(htmlContent);
-            }
+            HandleSuccess(response, htmlContent);
 
             Console.WriteLine($"Status: {response.StatusCode}");
         }
