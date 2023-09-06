@@ -19,7 +19,7 @@ class RequestHandler
 
     static void ErrorHandler(HttpListenerResponse response)
     {
-        string htmlFilePath = "C:\\Users\\samsung\\source\\repos\\HerlonServer\\HerlonServer\\pages\\error_route.html";
+        string htmlFilePath = "C:\\Users\\samsung\\source\\repos\\HerlonServer\\HerlonServer\\pages\\error\\error_route.html";
         string htmlContent = File.ReadAllText(htmlFilePath);
 
         response.StatusCode = (int)HttpStatusCode.NotFound;
