@@ -61,17 +61,21 @@ class RequestHandler
                 {
                     writer.Write(htmlContent);
                 }
+
+                Console.WriteLine($"Status: {response.StatusCode}");
             }
             else
             {
                 ErrorHandler(response);
-                Console.WriteLine("File not found: " + htmlFilePath);
+                Console.WriteLine($"Status: {response.StatusCode}");
+                Console.WriteLine("File not found.");
             }
         }
         else
         {
             ErrorHandler(response);
-            Console.WriteLine("The route requested does not exist: " + htmlFilePath);
+            Console.WriteLine($"Status: { response.StatusCode}");
+            Console.WriteLine("The route requested does not exist.");
         }
 
         response.Close();
