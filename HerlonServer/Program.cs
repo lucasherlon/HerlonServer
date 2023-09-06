@@ -32,7 +32,6 @@ class RequestHandler
             writer.Write(htmlContent);
         }
 
-
     }
 
     static void ProcessRequest(HttpListenerContext context)
@@ -41,35 +40,42 @@ class RequestHandler
         HttpListenerResponse response = context.Response;
 
         string path = request.Url.LocalPath;
-        string htmlFilePath = "";
+        string slicePath = path.Substring(1);
+        string htmlFilePath = $"C:\\Users\\samsung\\source\\repos\\HerlonServer\\HerlonServer\\pages\\{slicePath}";
         Console.WriteLine("Request for path: " + path);
 
-        if (path == "/" || path == "/index.html")
+        if (path == "/" )
+        { 
+            string htmlContent = File.ReadAllText("C:\\Users\\samsung\\source\\repos\\HerlonServer\\HerlonServer\\pages\\index.html");
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.ContentType = "text/html";
+            response.ContentLength64 = htmlContent.Length;
+
+            using (Stream output = response.OutputStream)
+            using (StreamWriter writer = new StreamWriter(output))
+            {
+                writer.Write(htmlContent);
+            }
+
+            Console.WriteLine($"Status: {response.StatusCode}");
+            
+        }
+        else if (File.Exists(htmlFilePath))
         {
+            string htmlContent = File.ReadAllText(htmlFilePath);
 
-            htmlFilePath = "C:\\Users\\samsung\\source\\repos\\HerlonServer\\HerlonServer\\pages\\index.html";
-            if (File.Exists(htmlFilePath))
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.ContentType = "text/html";
+            response.ContentLength64 = htmlContent.Length;
+
+            using (Stream output = response.OutputStream)
+            using (StreamWriter writer = new StreamWriter(output))
             {
-                string htmlContent = File.ReadAllText(htmlFilePath);
-
-                response.StatusCode = (int)HttpStatusCode.OK;
-                response.ContentType = "text/html";
-                response.ContentLength64 = htmlContent.Length;
-
-                using (Stream output = response.OutputStream)
-                using (StreamWriter writer = new StreamWriter(output))
-                {
-                    writer.Write(htmlContent);
-                }
-
-                Console.WriteLine($"Status: {response.StatusCode}");
+                writer.Write(htmlContent);
             }
-            else
-            {
-                ErrorHandler(response);
-                Console.WriteLine($"Status: {response.StatusCode}");
-                Console.WriteLine("File not found.");
-            }
+
+            Console.WriteLine($"Status: {response.StatusCode}");
         }
         else
         {
